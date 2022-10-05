@@ -15,7 +15,6 @@ These two lists will be printed with this format:
 """
 import os
 import sys
-import datetime
 
 valid_lines = []
 corrupt_lines = []
@@ -41,32 +40,80 @@ Don't forget to put the students.csv file in the same location as this file!
 '''
 
 def validate_data(line):
-    user = line.split(',')
+    invalidUserData = []
 
-    user = [{
-        'number': user[0],
-        'first_name': user[1],
-        'last_name': user[2],
-        'date': user[3],
-        'program': user[4]
-    }]
+    userData = line.split(',')
 
-    if studentNumberCheck(user['number']) and studentNumberCheck(user['first_name']) and studentNumberCheck(user['last_name']) and studentNumberCheck(user['date']) and dateChecker(user['number']):
-        print('goede user a mattie')
-    else:
-        print('verkeerde user a mattie')
+    user = {
+        'number': userData[0],
+        'first_name': userData[1],
+        'last_name': userData[2],
+        'date': userData[3],
+        'program': userData[4]
+    }
+
+    if studentNumberCheck(user['number']) and studentNameCheck(user['first_name']) and studentNameCheck(user['last_name']) and dateChecker(user['date']) and studentProgramCheck(user['program']):
+        valid_lines.append(line)
+        wrongData = False
+
+    if studentNumberCheck(user['number']) == False:
+        invalidUserData.append(user['number'])
+        wrongData = True
+
+    if studentNameCheck(user['first_name']) == False:
+        invalidUserData.append(user['first_name'])
+        wrongData = True
+
+    if studentNameCheck(user['last_name']) == False:
+        invalidUserData.append(user['last_name'])
+        wrongData = True
+
+    if studentProgramCheck(user['program']) == False:
+        invalidUserData.append(user['program'])
+        wrongData = True
+
+    if dateChecker(user['date']) == False:
+        invalidUserData.append(user['date'])
+        wrongData = True
+
+    if wrongData == True:
+        invalidDataString = f'{user["number"]},{user["first_name"]},{user["last_name"]},{user["date"]},{user["program"]} => INVALID DATA: {invalidUserData}'
+        corrupt_lines.append(invalidDataString)
 
 def studentNumberCheck(number):
-    print(number)
+    if len(number) == 7:
+        if(number[0] == '0'):
+            if(number[1] == '9' or number[1] == '8'):
+                if number.isnumeric():
+                    return True
+    return False
 
+# - First name and last names, contains only alphabet.
 def studentNameCheck(name):
-    print(name)
+    return name.isalpha()
 
+
+# - Study program can have one of these values: INF, TINF, CMD, AI.
 def studentProgramCheck(program):
-    print(program)
+    availablePrograms = ['INF', 'TINF', 'CMD', 'AI']
 
+    return program in availablePrograms
+
+
+# - Date of birth has this format: YYYY-MM-DD. Days between 1 and 31, months between 1 and 12 and Years between 1960 and 2004.
 def dateChecker(date):
-    print(date)
+
+    if len(date) != 10:
+        return False
+
+    year, month, day = date.split('-')
+
+    if 1960 <= int(year) <= 2004:
+        if 1 <= int(day.lstrip('0')) <= 31:
+            if 1 <= int(month.lstrip('0')) <= 12:
+                return True
+
+    return False
 
 def main(csv_file):
     with open(os.path.join(sys.path[0], csv_file), newline='') as csv_file:
