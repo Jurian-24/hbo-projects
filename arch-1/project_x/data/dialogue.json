@@ -1,0 +1,184 @@
+{
+    "npc": {
+        "banditPlopBridge": {
+            "name": "The bridge troll",
+            "type":"moody",
+            "questions": [
+                {
+                    "question": "What brings you here?",
+                    "answers":
+                    [
+                        "A) I am looking for the egg's of Joey.",
+                        "B) I am hunting, get out of my way!",
+                        "C) It is none of your business."
+                    ]
+                },
+                {
+                    "question": "Why are you looking for that?",
+                    "answers":
+                    [
+                        "A) It's a request from the king, Judis Andris.",
+                        "B) I am looking for a cure for my sick daughter."
+                    ]
+                },
+                {
+                    "finalMessage": "Alright if it's a king's request I will let you pass"
+                }
+            ]
+        },
+        "justinTimberland": {
+            "name": "Justin Timberland",
+            "type":"hostile",
+            "questions": [
+                {
+                    "question": "No body visits me! Who are you?",
+                    "answers":
+                    [
+                        "A) I am a Lord {player}, knight of Emoelandia.",
+                        "B) Get out of my way."
+                    ]
+                },
+                {
+                    "question": "[player_name]? Never heard of him, who are you really?!",
+                    "answers":
+                    [
+                        "A) I am a Lord {player}, knight of Emoelandia.",
+                        "B) Get out of my way"
+                    ]
+                },
+                {
+                    "question": "You are lying! Nobody lies to me!",
+                    "answers":
+                    [
+                        "A) Kill"
+                    ]
+                }
+            ],
+            "finalMessage": "Why are you grabbing your sword? oh..."
+        },
+        "windhagen": {
+            "name": "Tywin Wennister",
+            "type":"friendly",
+            "questions": [
+                {
+                    "question": "Are you looking for Joey's 'egg's?",
+                    "answers":
+                    [
+                        "Yes I am but how do you know?"
+                    ]
+                },
+                {
+                    "question": "My family was obsessed with the theory that there might be something on top of the mountain.",
+                    "answers":
+                    [
+                        "Are you also headed towards the top then?"
+                    ]
+                },
+                {
+                    "question": "No I was hunting for food but I didnt had the chance to hunt an animal down before it went dark",
+                    "answers":
+                    [
+                        "Well what are you going to do next?"
+                    ]
+                },
+                {
+                    "question": "I wanted to have one final meal with my family before heading of to war against the Mevanian Empire",
+                    "answers":
+                    [
+                        "Since when are we at war with the Mevanian Empire?"
+                    ]
+                },
+                {
+                    "question": "Since a week, I dont fight for the Emoelandian army but Im a sell sword. I prefer calling it a mercenary. I want to earn some drachmen!",
+                    "answers":
+                    [
+                        "So you are going to sell your sword to who?"
+                    ]
+                },
+                {
+                    "question": "To the Brokebell Kingdom. They will win the war most likely and I will be rich.",
+                    "answers":
+                    [
+                        "What will you do with your drachmen than?"
+                    ]
+                },
+                {
+                    "question": "I will board a ship and sail to the west to see if the rumours are true.",
+                    "answers":
+                    [
+                        "What rumours? Do you mean the rumours about the continent west?"
+                    ]
+                },
+                {
+                    "question": "Yes! It is called Wrinstfall according to the king Judis Andris. The founders of Amaru came from there so they say. But it is getting late have some rest and thank you for letting me share your fire",
+                    "answers":
+                    [
+                        "Have a good night!"
+                    ]
+                }
+
+            ],
+            "finalMessage": "Safe travels"
+
+        },
+        "sodderlands": {
+            "name": "Hector Robben",
+            "type":"friendly",
+            "questions": [
+                {
+                    "question": "Hello good sir how are you doing today!",
+                    "answers":
+                    [
+                        "A) I am great. Nice talking to you",
+                        "B) I am doing fine, I want to cross this bridge"
+                    ]
+                },
+                {
+                    "question": "You look weak. Please take this potion. It will make you feel stronger and you will need it [player]",
+                    "answers":
+                    [
+                        "A) Thank you! (Take potion)",
+                        "B) Id rather not"
+                    ]
+                },
+                {
+                    "question": "I come from a land far west from here. You don't know nothing about the world. Take this potion [player].",
+                    "answers":
+                    [
+                        "A) Take potion"
+                    ]
+                }
+            ],
+            "finalMessage": "Drink it slowly and before you go to battle!"
+        },
+        "kingsMountain": {
+            "name": "Joey the Egg's protector",
+            "type":"hostile",
+            "questions": [
+                {
+                    "question": "Who awakes me from my sleep? Who are you weakling?",
+                    "answers":
+                    [
+                        "I am {player}, knight of Emoelandia and I am looking for Joey's egg's"
+                    ]
+                },
+                {
+                    "question": "Why do you want my eggs?",
+                    "answers":
+                    [
+                        "A) I have found a papyrus roll with information that has led me here. Could you please hand them over to me?",
+                        "B) Wait are you Joey the egg protector?"
+                    ]
+                },
+                {
+                    "question": "I will not them without a fight!",
+                    "answers":
+                    [
+                        "A) Fight"
+                    ]
+                }
+            ],
+            "finalMessage": "Well there goes my egg's goodbye good sir"
+        }
+    }
+}
