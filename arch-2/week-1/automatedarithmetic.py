@@ -47,7 +47,7 @@ def arithmetic_operation(arithmeticType):
                 print('Wrong answer')
                 wrongAnswers.append(question)
                 print(wrongAnswers)
-        elif arithmeticType == 'substraction':
+        elif arithmeticType == 'subtraction':
             answer = int(input(f'{number1} - {number2} = '))
             if answer == number1 - number2:
                 print('Right answer')
@@ -55,7 +55,7 @@ def arithmetic_operation(arithmeticType):
                 print('Wrong answer')
                 wrongAnswers.append(question)
         else:
-            print('Error: you can only choose between: substraction, multiplication, summation')
+            print('Error: you can only choose between: subtraction, multiplication, summation')
             break
 
     print('You got the following questions wrong:')
