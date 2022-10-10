@@ -8,8 +8,25 @@ one unique character.
 * Which solution would you prefer?
 '''
 
-def unique_chars_dict():
-    return True
+def unique_chars_dict(string):
+    characters = {
+        'singular': [],
+        'duplicate':[]
+    }
 
-def unique_chars_set():
-    return True
+    for char in string:
+        if char not in characters['singular']:
+            characters['singular'].append(char)
+        else:
+            characters['duplicate'].append(char)
+
+    print(f'dic: {len(characters["singular"])} unique character(s)')
+
+def unique_chars_set(string):
+    characters = set(tuple(char) for char in string)
+    print(f'{len(characters)} unique character(s)')
+
+if __name__ == '__main__':
+    userInput = input('Enter a word: ')
+    unique_chars_dict(userInput)
+    unique_chars_set(userInput)
