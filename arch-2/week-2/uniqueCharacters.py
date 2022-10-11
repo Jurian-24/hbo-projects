@@ -9,18 +9,12 @@ one unique character.
 '''
 
 def unique_chars_dict(string):
-    characters = {
-        'singular': [],
-        'duplicate':[]
-    }
+    characters = {}
 
     for char in string:
-        if char not in characters['singular']:
-            characters['singular'].append(char)
-        else:
-            characters['duplicate'].append(char)
+        characters[char] = True
 
-    print(f'dic: {len(characters["singular"])} unique character(s)')
+    print(f'dic: {len(characters)} unique character(s)')
 
 def unique_chars_set(string):
     characters = set(tuple(char) for char in string)
