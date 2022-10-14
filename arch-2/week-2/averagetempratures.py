@@ -15,3 +15,60 @@ temperatures = (
     ('2020', '3', ['43.2', '41.1', '40.0', '43.6', '42.6', '44.0', '44.0', '47.9', '46.6', '50.5', '51.5', '47.7', '44.7', '44.0', '48.9',
      '45.3', '46.6', '49.7', '47.2', '44.8', '41.8', '40.9', '41.0', '42.7', '43.4', '44.0', '46.4', '45.5', '40.7', '39.5', '40.6'])
 )
+
+
+def compareSets(list1, list2):
+    set_difference = set(list1) - set(list2)
+    list_difference = list(set_difference)
+
+    for difference in list_difference:
+        list1 = list(list1)
+        list1.remove(difference)
+
+    return len(list1)
+
+
+def getHighestTemp(returnYear):
+    highestTemp = 0
+    highestTempYear = 0
+
+    for year in temperatures:
+        sortedTempratures = sorted(year[2], reverse=True)
+
+        if float(sortedTempratures[0]) > highestTemp:
+            highestTemp = float(sortedTempratures[0])
+            highestTempYear = int(year[0])
+
+    if returnYear:
+        return highestTempYear
+
+    return highestTemp
+
+
+def warmestMonth(setOfTempratures):
+    averageTemp = 0
+    highestAverageYear = 0
+
+    for year in setOfTempratures:
+
+        for i in range(len(year[2])):
+            year[2][i] = float(year[2][i])
+
+        yearAverage = sum(year[2]) / len(year[2])
+
+        if yearAverage > averageTemp:
+            averageTemp = yearAverage
+            highestAverageYear = year[0]
+
+    return highestAverageYear
+
+
+temprature1995 = set(temperatures[0][2])
+temprature2010 = set(temperatures[1][2])
+temprature2020 = set(temperatures[2][2])
+
+if __name__ == '__main__':
+    print(compareSets(temprature1995, temprature2010))
+    print(compareSets(temprature1995, temprature2020))
+    print(getHighestTemp(True))
+    print(warmestMonth(temperatures))
