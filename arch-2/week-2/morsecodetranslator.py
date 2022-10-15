@@ -15,6 +15,9 @@ Implement a program that uses a dictionary to store the mapping from letters and
   if it is a normal text or a morse code. Then based on the type of the message it translates to the other one.
 """
 
+from concurrent.futures.process import _system_limits_checked
+
+
 MORSE_CODE_DICT = {
     'A': '.-', 'B': '-...',
     'C': '-.-.', 'D': '-..', 'E': '.',
@@ -30,3 +33,56 @@ MORSE_CODE_DICT = {
     '7': '--...', '8': '---..', '9': '----.',
     '0': '-----', ',': '--..--', '.': '.-.-.-',
     '?': '..--..'}
+
+def message_to_morse(message):
+	messageInMorse = ''
+
+	for char in message:
+		if char == ' ':
+			messageInMorse += '    '
+		elif MORSE_CODE_DICT.get(char.upper()):
+			morseChar = MORSE_CODE_DICT.get(char.upper())
+			messageInMorse += morseChar + ' '
+		else:
+			return f'Can`t convert char [{char}]'
+	return messageInMorse
+
+
+def morse_to_message(morseCode):
+	morseCode += ' '
+	morseLetter = ''
+	message = ''
+
+	for char in morseCode:
+		if char == ' ':
+			if morseLetter in MORSE_CODE_DICT.values():
+				message += list(MORSE_CODE_DICT.keys())[list(MORSE_CODE_DICT.values()).index(morseLetter)]
+				morseLetter = ''
+			else:
+				continue
+		else:
+			morseLetter += char
+
+	return message
+
+
+def translate_text(message):
+	if validateMorseCode(message):
+		return morse_to_message(message)
+	else:
+		return message_to_morse(message)
+
+def validateMorseCode(morseCode):
+	morseChars = {'.', '-', ' '}
+
+	for char in morseCode:
+		if char not in morseChars:
+			return False
+
+	return True
+
+if __name__ == '__main__':
+	message = input('Enter a message: ')
+	print(message_to_morse(message))
+	print(morse_to_message(message))
+	print(translate_text(message))
