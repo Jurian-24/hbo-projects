@@ -1,27 +1,14 @@
 [
     {
-        "id": 1,
-        "first_name": "Clark",
-        "last_name": "Kent",
+        "id": 3,
+        "first_name": "James",
+        "last_name": "Doe",
         "emails": [
-            "clark@kent.private",
-            "c.kent@dailyplanet.work"
+            "james.doe@work.mail"
         ],
         "phone_numbers": [
-            "0881234567",
-            "0101234567"
-        ]
-    },
-    {
-        "id": 2,
-        "first_name": "Peter",
-        "last_name": "Parker",
-        "emails": [
-            "peter@parker.me",
-            "pparker@dailybugle.com"
-        ],
-        "phone_numbers": [
-            "0677345678"
+            "0612345678",
+            "0201234567"
         ]
     },
     {
@@ -34,6 +21,32 @@
         "phone_numbers": [
             "0612345678",
             "0201234567"
+        ]
+    },
+    {
+        "id": 3,
+        "first_name": "Jurian",
+        "last_name": "Baap",
+        "emails": [
+            [
+                "adsa@mail.com"
+            ]
+        ],
+        "phone_numbers": [
+            "0612345678"
+        ]
+    },
+    {
+        "id": 4,
+        "first_name": "Joe",
+        "last_name": "Bidome",
+        "emails": [
+            [
+                "kinker@gmail.com"
+            ]
+        ],
+        "phone_numbers": [
+            "0612345678"
         ]
     }
 ]

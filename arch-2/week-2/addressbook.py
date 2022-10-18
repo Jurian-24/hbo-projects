@@ -17,6 +17,27 @@ import json
 
 addressbook = []
 
+# Helpers
+
+
+def emailCheck(email):
+    for char in email:
+        if char == '@':
+            return True
+
+    return False
+
+
+def phoneCheck(phoneNumber):
+    if (len(phoneNumber) >= 9):
+        return phoneNumber.isdigit()
+
+def removeArrayBrackets(string):
+    string = str(string).replace("[", '')
+    string = str(string).replace("]", '')
+    string = str(string).replace("'", '')
+
+    return string
 
 '''
 print all contacts in the following format:
@@ -27,19 +48,35 @@ Last name: <lastname>
 Emails: <email_1>, <email_2>
 Phone numbers: <number_1>, <number_2>
 '''
-def display(list = []):
-    ...
+
+
+def display(contactList, singleContact=None):
+    if singleContact:
+        print(f'Position: {contactList["id"]}')
+        print(f'First name: {contactList["first_name"]}')
+        print(f'Last name: {contactList["last_name"]}')
+        print(f'Emails: {removeArrayBrackets(contactList["emails"])}')
+        print(f'Phone numbers: {removeArrayBrackets(contactList["phone_numbers"])}')
+
+    else:
+        for contact in contactList:
+            print(contact)
+            print(f'Position: {contact["id"]}')
+            print(f'First name: {contact["first_name"]}')
+            print(f'Last name: {contact["last_name"]}')
+            print(f'Emails: {removeArrayBrackets(contact["emails"])}')
+            print(f'Phone numbers: {removeArrayBrackets(contact["phone_numbers"])}')
+            print('\n')
 
 
 '''
 return list of contacts sorted by first_name or last_name [if blank then unsorted], direction [ASC (default)/DESC])
 '''
-def list_contacts(...):
-    # todo: implement this function
-    ...
 
-    return addressbook
 
+def list_contacts():
+
+    return display(addressbook)
 
 '''
 add new contact:
@@ -48,22 +85,73 @@ add new contact:
 - emails = {}
 - phone_numbers = {}
 '''
-def add_contact(...):
-    # todo: implement this function
-    ...
 
 
+def add_contact():
+
+    firstName = input('').capitalize()
+    lastName = input('').capitalize()
+    emails = input('')
+    phoneNumbers = input('')
+
+    emails = emails.split(',')
+
+    if len(emails) != len(set(emails)):
+        return 'You cant enter the same email adress'
+
+    emailInvalid = True
+    while emailInvalid:
+        for email in emails:
+            if emailCheck(email):
+                emailInvalid = False
+            else:
+                emails = input('Enter valid email adresses: ')
+
+    emailAdresses = [emails]
+
+    phoneNumbers = phoneNumbers.split(',')
+
+    phonesInvalid = True
+    while phonesInvalid:
+        for phone in phoneNumbers:
+            if phoneCheck(phone):
+                phonesInvalid = False
+            else:
+                phoneNumbers = input('Enter valid phone numbers: ')
+
+    newContact = {
+        "id": len(addressbook) + 1,
+        "first_name": firstName,
+        "last_name": lastName,
+        "emails": emails,
+        "phone_numbers": phoneNumbers
+    }
+
+    addressbook.append(newContact)
+
+    write_to_json('contacts.json')
+
+    display(newContact, True)
 '''
 remove contact by ID (integer)
 '''
-def remove_contact(...):
-    # todo: implement this function
-    ...
 
+
+def remove_contact():
+    contactId = int(input('Which contact do you want remove'))
+
+    for i in range(len(addressbook)):
+        if addressbook[i]['id'] == contactId:
+            addressbook.pop(i)
+            break
+
+    write_to_json('contacts.json')
 
 '''
 merge duplicates (automated > same fullname [firstname & lastname])
 '''
+
+
 def merge_contacts():
     # todo: implement this function
     ...
@@ -73,6 +161,8 @@ def merge_contacts():
 read_from_json
 Do NOT change this function
 '''
+
+
 def read_from_json(filename):
     # read file
     with open(os.path.join(sys.path[0], filename)) as outfile:
@@ -86,31 +176,58 @@ def read_from_json(filename):
 write_to_json
 Do NOT change this function
 '''
+
+
 def write_to_json(filename):
-    json_object = json.dumps(addressbook, indent = 4)
+    json_object = json.dumps(addressbook, indent=4)
 
     with open(os.path.join(sys.path[0], filename), "w") as outfile:
         outfile.write(json_object)
 
 
 '''
-main function: build menu structure as following and call the appropriate functions:
-- the input can be case-insensitive (so E and e are valid inputs)
-- [E] Encode value to hashed value
-- [D] Decode hashed value to normal value
-- [P] Print all encoded/decoded values
-- [Q] Quit program
+main function:
+# build menu structure as following
+# the input can be case-insensitive (so E and e are valid inputs)
+# [L] List contacts
+# [A] Add contact
+# [R] Remove contact
+# [M] Merge contacts
+# [Q] Quit program
 Don't forget to put the contacts.json file in the same location as this file!
 '''
+
 
 def main(json_file):
     read_from_json(json_file)
 
-    # todo: implement this function.
+    options = ['[L] List contacts', '[A] Add contact',
+               '[R] Remove contact', '[M] Merge contacts', '[Q] Quit program', ]
+
+    for option in options:
+        print(option)
+
+    choice = input('').lower()
+
+    if choice == 'l':
+        list_contacts()
+        main('contacts.json')
+    elif choice == 'a':
+        add_contact()
+        main('contacts.json')
+    elif choice == 'r':
+        remove_contact()
+        main('contacts.json')
+    elif choice == 'm':
+        return True
+    elif choice == 'q':
+        return True
+    else:
+        main('contacts.json')
 
 
 '''
-calling main function:
+calling main function::
 Do NOT change it.
 '''
 if __name__ == "__main__":
