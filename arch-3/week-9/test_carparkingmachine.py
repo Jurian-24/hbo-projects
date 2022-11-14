@@ -18,4 +18,12 @@ def test_check_out():
     # Assert that {license_plate} is in parked_cars
     # Assert that correct parking fee is provided when checking-out {license_plate}
     # Aseert that {license_plate} is no longer in parked_cars
+    cpm_mid = CarParkingMachine(hourly_rate=6)
+    cpm_mid.check_in(license_plate='DDD')
+
+    assert True == ('DDD' in cpm_mid.parked_cars)
+    assert 6.0 == cpm_mid.check_out(license_plate='DDD')
+
     return
+
+test_check_out

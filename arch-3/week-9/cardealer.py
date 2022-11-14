@@ -13,8 +13,6 @@ class Car:
         if Customer:
             self.sold_to = Customer
 
-        return
-
     def print(self):
         car_info = {
             'Brand': self.brand,
@@ -61,14 +59,12 @@ class Motorcycle():
         if Customer:
             self.sold_to = f'{Customer.firstName} {Customer.lastName}'
 
-        return
-
     def print(self):
         motorcycle_info = {
             'Brand': self.brand,
             'Color': self.color,
             'Model': self.model,
-            'Price': self.model,
+            'Price': self.price,
             'Sold': [
                 self.sold,
                 self.sold_to

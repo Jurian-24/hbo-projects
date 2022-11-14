@@ -1,6 +1,7 @@
 import json
 import time
 import requests
+from tkinter import *
 # from sense_hat import SenseHat
 
 
@@ -41,7 +42,7 @@ def createNode(title, description):
     r = requests.post(url = endPoint, json = node)
 
     # Response is a string, transform it into a dict
-    responseData = eval(r.text)
+    responseData = json.loads(r.text)
 
     nodeId = responseData['id']
     nodeKey = responseData['key']
