@@ -1,0 +1,2 @@
+2022-11-17 01:55:25.013431;cpm_name=North;license_plate=baap;action=check-in;
+2022-11-17 01:55:25.013431;cpm_name=North;license_plate=baap;action=check-out;parking_fee=2.50;

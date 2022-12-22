@@ -1,0 +1,26 @@
+[
+    {
+        "BB-494-H": "<carparking.ParkedCar object at 0x104567f70>"
+    },
+    {
+        "HH-494-B": "<carparking.ParkedCar object at 0x104567f70>"
+    },
+    {
+        "baap": "<__main__.ParkedCar object at 0x10492dc30>"
+    },
+    {
+        "dikke baap": "<__main__.ParkedCar object at 0x1006bdc30>"
+    },
+    {
+        "dikke": "<__main__.ParkedCar object at 0x1047af250>"
+    },
+    {
+        "baap": "<__main__.ParkedCar object at 0x102e4b250>"
+    },
+    {
+        "dikke": "<__main__.ParkedCar object at 0x1005ab250>"
+    },
+    {
+        "dikke": "<__main__.ParkedCar object at 0x1046ab250>"
+    }
+]

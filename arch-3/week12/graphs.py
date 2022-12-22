@@ -35,13 +35,7 @@ def showGraph(coin, graphChoice):
 
         plt.show()
     elif graphChoice == 'histogram':
-        import numpy
-
-        x = values
-        y = numpy.random.normal(150, 40, 100) / x
-
-        plt.scatter(x, y)
-        plt.show()
+        print('This function is not ready yet.')
 
 
 def startApp():
