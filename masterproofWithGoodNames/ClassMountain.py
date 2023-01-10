@@ -3,7 +3,7 @@ import sqlite3
 class Mountain:
 
     def __init__(self, id: int, name: str, country: str, rank: int, height: int, prominence: int, range: str) -> None:
-        self.id = id,
+        self.id = id
         self.name = name
         self.country = country
         self.rank = rank
@@ -18,6 +18,7 @@ class Mountain:
 
     def get_expeditions(self) -> list():
         query = "SELECT * FROM expeditions WHERE mountain_id = ?"
+
         self.cursor.execute(query, [self.id])
         expeditions = self.cursor.fetchall()
 
