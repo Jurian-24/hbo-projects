@@ -34,7 +34,7 @@ def set_mountains(mountains: list, data):
         """
         values = [
             mountain['name'],
-            ','.join(mountain['countries']),
+            mountain['countries'][0],
             mountain['rank'],
             mountain['height'],
             mountain['prominence'],
@@ -88,6 +88,11 @@ def set_climbers(conn, data, expedition):
             climber['nationality'],
             climber['date_of_birth']
         ]
+
+        for value in values:
+            print(type(value))
+
+        return
 
         conn.execute(query, values)
         set_expedition_climber(conn, climber['id'], expedition['id'])
