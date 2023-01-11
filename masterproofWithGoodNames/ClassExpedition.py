@@ -1,4 +1,6 @@
 from datetime import datetime
+from datetime import timedelta
+import sqlite3
 
 from ClassClimber import Climber
 from ClassMountain import Mountain
@@ -14,27 +16,62 @@ class Expedition:
         self.country = country
         self.duration = duration
         self.success = success
+        self.conn = sqlite3.connect('climbersapp.db')
 
-    def add_climber(climber: Climber):
+    def add_climber(self, climber: Climber):
+        query = """
+            INSERT INTO expedition_climbers (climber_id, expedition_id)
+            SELECT ?, ?
+            WHERE NOT EXISTS (SELECT 1 FROM expedition_climbers WHERE climber_id = ? AND expedition_id = ?)
+        """
+
+        self.conn.execute(query, [climber.id, self.id, climber.id, self.id])
+        self.conn.commit()
+
+    def get_climbers(self) -> list:
+        cursor = self.conn.cursor()
+        query = f"""
+            SELECT * FROM climbers WHERE id IN (SELECT climber_id FROM expedition_climbers WHERE expedition_id = {self.id})
+            """
+
+        cursor.execute(query)
+
+        people = cursor.fetchall()
+
+        return people
+
+    def get_mountain(self) -> Mountain:
         pass
 
-    def get_climbers() -> list:
-        pass
+    def convert_date(self, to_format: str) -> str:
+        return datetime.strftime(self.date, to_format)
 
-    def get_mountain() -> Mountain:
-        pass
+    def convert_duration(self, to_format: str) -> str:
+        string = ''
+        totalSeconds = 0
+        containsMinutes = True
 
-    def convert_date(to_format: str) -> str:
-        pass
+        if self.duration[-1].upper() == 'H':
+            containsMinutes = False
 
-    def convert_duration(to_format: str) -> str:
-        pass
+        for char in self.duration:
+            if char.isnumeric():
+                string += char
 
-    def get_duration() -> str:
-        pass
+            if char == 'H' or char == 'h':
+                totalSeconds += int(string) * 3600
+                string = ''
+                continue
 
-    def get_climbers() -> dict:
-        pass
+        if containsMinutes:
+            totalSeconds += int(string) * 60
+
+        convertedDuration = str(timedelta(seconds=totalSeconds))
+
+        return convertedDuration
+
+    def get_duration(self) -> str:
+        return self.duration
 
 
     # Representation method
@@ -42,3 +79,10 @@ class Expedition:
     # Format is @dataclass-style: Classname(attr=value, attr2=value2, ...)
     def __repr__(self) -> str:
         return "{}({})".format(type(self).__name__, ", ".join([f"{key}={value!r}" for key, value in self.__dict__.items()]))
+
+# date = datetime.strptime('1903-05-05', '%Y-%m-%d')
+
+# expedition = Expedition(1, 'naam', 4, 'norgen', date, 'rusland', '2h', 1)
+
+# print(expedition.get_climbers())
+# print('test333')
