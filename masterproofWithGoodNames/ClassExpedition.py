@@ -16,20 +16,21 @@ class Expedition:
         self.country = country
         self.duration = duration
         self.success = success
-        self.conn = sqlite3.connect('climbersapp.db')
 
     def add_climber(self, climber: Climber):
+        conn = sqlite3.connect('climbersapp.db')
         query = """
             INSERT INTO expedition_climbers (climber_id, expedition_id)
             SELECT ?, ?
             WHERE NOT EXISTS (SELECT 1 FROM expedition_climbers WHERE climber_id = ? AND expedition_id = ?)
         """
 
-        self.conn.execute(query, [climber.id, self.id, climber.id, self.id])
-        self.conn.commit()
+        conn.execute(query, [climber.id, self.id, climber.id, self.id])
+        conn.commit()
 
     def get_climbers(self) -> list:
-        cursor = self.conn.cursor()
+        conn = sqlite3.connect('climbersapp.db')
+        cursor = conn.cursor()
         query = f"""
             SELECT * FROM climbers WHERE id IN (SELECT climber_id FROM expedition_climbers WHERE expedition_id = {self.id})
             """
