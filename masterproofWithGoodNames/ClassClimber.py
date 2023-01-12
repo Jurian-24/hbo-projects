@@ -9,8 +9,6 @@ class Climber:
         self.last_name = last_name
         self.nationality = nationality
         self.date_of_birth = date_of_birth
-        self.conn = sqlite3.connect('climbersapp.db')
-        self.cursor = self.conn.cursor()
 
 
     def get_age(self) -> int:
@@ -19,8 +17,10 @@ class Climber:
 
 
     def get_expeditions(self) -> list():
+        conn = sqlite3.connect('climbersapp.db')
         query = "SELECT * FROM expeditions WHERE id IN (SELECT expedition_id FROM expedition_climbers WHERE climber_id = ?)"
-        self.cursor.execute(query, [self.id])
+        cursor = conn.cursor()
+        cursor.execute(query, [self.id])
         expeditions = self.cursor.fetchall()
 
         return expeditions
